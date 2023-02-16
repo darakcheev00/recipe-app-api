@@ -44,3 +44,4 @@ class UserAdmin(BaseUserAdmin):
 # provide useradmin as second arg because we want our custom changes to be picked up
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Recipe)
+admin.site.register(models.Tag)
