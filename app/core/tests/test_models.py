@@ -1,8 +1,8 @@
 """
 Tests for models
 """
+from unittest.mock import patch
 from decimal import Decimal
-
 
 # base class
 from django.test import TestCase 
@@ -86,3 +86,24 @@ class ModelTests(TestCase):
         user = create_user()
         tag = models.Tag.objects.create(user=user, name='Tag1')
         self.assertEqual(str(tag), tag.name)
+
+    def test_create_ingredient(self):
+        """Test creating an ingredient is successful"""
+        user = create_user()
+        ingredient = models.Ingredient.objects.create(
+            user = user,
+            name = 'Ingredient1'
+        )
+
+        self.assertEqual(str(ingredient), ingredient.name)
+    
+    @patch('core.models.uuid.uuid4')
+    def test_recipe_file_name_uuid(self, mock_uuid):
+        # patch used to make unique file names for all images added
+        """Test generating image path"""
+        uuid = 'test-uuid'
+        mock_uuid.return_value = uuid
+        # mock the uuid response to just return test-uuid instead of a long unique string
+        file_path = models.recipe_image_file_path(None, 'example.jpg')
+
+        self.assertEqual(file_path, f'uploads/recipe/{uuid}.jpg')
