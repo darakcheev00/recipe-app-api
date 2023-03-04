@@ -1,0 +1,32 @@
+eval "$(ssh-agent -s)"
+# if pid printed then:
+    ssh-add /path/to/id_rsa
+# else:
+    ssh-agent sh -c 'ssh-add /path/to/aws_id_rsa; echo $SSH_AUTH_SOCK'
+
+# connect to ec2 USING ADMIN BASH
+ssh ec2-user@52.54.62.166
+
+# inside machine: 
+ssh-keygen -t ed25519 -b 4096
+cat ~/.ssh/id_ed25519.pub
+# add key to deploy keys as "server"
+
+
+# after running commands in the command list on github
+
+git clone using ssh url
+
+cd folder
+
+cp .env.sample .env
+vi .env
+
+DB_NAME=recipedb
+DB_USER=recipeuser
+DB_PASS=make a secure password for the db
+DJANGO_SECRET_KEY=8fy398r34yco897h89d74oq97698dqh9rd349rhd379d3h79d64r39hd
+DJANGO_ALLOWED_HOSTS=ec2-52-54-62-166.compute-1.amazonaws.com
+
+
+fireflyadmin@example.com
